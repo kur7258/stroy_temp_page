@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>식당 설비 상태 모니터링</title>
+    <link rel="stylesheet" href="floorplan.css?v=4">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- 메인 콘텐츠 -->
+        <div class="main-content">
+            <!-- 헤더 -->
+            <div class="content-header">
+                <div class="header-left">
+                    <h1>식당 설비 상태 모니터링</h1>
+                    <p class="header-subtitle">식당 설비 상태 모니터링</p>
+                </div>
+                <div class="date-time">
+                    <span id="current-time">2025년 9월 8일 14:30</span>
+                </div>
+            </div>
+
+            <!-- 도면 영역 -->
+            <div class="floorplan-container">
+                <div class="floorplan-wrapper">
+                    <img src="도면.png" alt="식당 도면" class="floorplan-image">
+                    
+                    <!-- 설비 마커들 -->
+                    <div class="equipment-marker status-normal" 
+                         data-equipment="컵세척기1" 
+                         data-status="정상" 
+                         data-detail=""
+                         style="top: 15%; left: 15%;">
+                        <div class="marker-dot"></div>
+                    </div>
+
+                    <div class="equipment-marker status-warning" 
+                         data-equipment="국탕로봇1" 
+                         data-status="02, 모터 과열" 
+                         data-detail="가동시간: 3h45m"
+                         style="top: 45%; left: 67%;">
+                        <div class="marker-dot"></div>
+                    </div>
+
+                    <div class="equipment-marker status-warning" 
+                         data-equipment="국탕로봇2" 
+                         data-status="02, 모터 과열" 
+                         data-detail="가동시간: 3h45m"
+                         style="top: 45%; left: 79.5%;">
+                        <div class="marker-dot"></div>
+                    </div>
+
+                    <div class="equipment-marker status-warning" 
+                         data-equipment="컵세척기2" 
+                         data-status="03, 브러시셋 미접촉" 
+                         data-detail=""
+                         style="top: 65%; left: 15%;">
+                        <div class="marker-dot"></div>
+                    </div>
+
+                    <div class="equipment-marker status-normal" 
+                         data-equipment="오토웍1" 
+                         data-status="02, 모터 과열" 
+                         data-detail="가동시간: 2h45m"
+                         style="top: 57%; left: 67%;">
+                        <div class="marker-dot"></div>
+                    </div>
+
+                    <div class="equipment-marker status-normal" 
+                         data-equipment="오토웍2" 
+                         data-status="02, 모터 과열" 
+                         data-detail="가동시간: 3h45m"
+                         style="top: 57%; left: 79.5%;">
+                        <div class="marker-dot"></div>
+                    </div>
+
+                    <!-- 코너 정보 박스 -->
+                    <div class="corner-info-box" style="top: 5%; left: 40%;">
+                        <div class="corner-title">코너1, 이화수육개장</div>
+                        <div class="corner-stats">
+                            <div class="corner-stat">달성율 : 35%, 465명</div>
+                            <div class="corner-stat">대기인원 : 24명, 대기시간 : 10분</div>
+                        </div>
+                    </div>
+
+                    <!-- 코너 정보 박스2 -->
+                    <div class="corner-info-box" style="top: 65%; left: 65%;">
+                        <div class="corner-title">코너2, 계란떡볶이</div>
+                        <div class="corner-stats">
+                            <div class="corner-stat">달성율 : 70%, 378명</div>
+                            <div class="corner-stat">대기인원 : 12명, 대기시간 : 5분</div>
+                        </div>
+                    </div>
+
+                    <!-- 코너 정보 박스3 -->
+                    <div class="corner-info-box" style="top: 80%; left: 20%;">
+                        <div class="corner-title">코너3, 뚝배기전복소라톳밥</div>
+                        <div class="corner-stats">
+                            <div class="corner-stat">달성율 : 105%, 525명</div>
+                            <div class="corner-stat">대기인원 : 30명, 대기시간 : 14분</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 우측 사이드바 -->
+        <div class="sidebar" id="equipmentSidebar">
+            <div class="sidebar-header">
+                <h2 id="selectedEquipmentName">장비 가동 상태 세부 표기</h2>
+                <button class="close-sidebar" id="closeSidebar">×</button>
+            </div>
+            
+            <!-- 상태 색상 범례 -->
+            <div class="sidebar-legend-panel">
+                <div class="legend-header">장비 가동 상태 색상 표기</div>
+                <div class="legend-items">
+                    <div class="legend-item">
+                        <div class="legend-dot status-normal"></div>
+                        <span>정상</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot status-warning"></div>
+                        <span>점검</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot status-error"></div>
+                        <span>비상</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot status-maintenance"></div>
+                        <span>대기/미운영</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 장비 상세 정보 -->
+            <div class="equipment-detail-panel">
+                <div class="no-selection">
+                    <div class="no-selection-icon">⚙️</div>
+                    <p>설비를 선택하면<br>상세 정보를 확인할 수 있습니다</p>
+                </div>
+                <div class="equipment-details" id="equipmentDetails" style="display: none;">
+                    <!-- 동적으로 생성될 상세 정보 -->
+                </div>
+            </div>
+
+            <!-- 에러 정보 패널 -->
+            <div class="error-panel">
+                <div class="panel-header">
+                    <h3>장비 알람 현황</h3>
+                </div>
+                <div class="error-section">
+                    <div class="error-header">에러 코드 표시</div>
+                    <div class="error-item error">
+                        <span class="error-icon">!</span>
+                        <span class="error-code">에러 코드(E-04)</span>
+                        <span class="error-desc">에러 내용</span>
+                    </div>
+                </div>
+                <div class="warning-section">
+                    <div class="warning-header">비상 상황 표시</div>
+                    <div class="error-item warning">
+                        <span class="error-icon">⚠</span>
+                        <span class="error-code">비상 코드(W-02)</span>
+                        <span class="error-desc">모터 과열</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 툴팁 -->
+    <div id="tooltip" class="tooltip">
+        <div class="tooltip-content">
+            <div class="tooltip-title"></div>
+            <div class="tooltip-status"></div>
+            <div class="tooltip-detail"></div>
+        </div>
+    </div>
+
+    <script src="floorplan.js?v=2"></script>
+</body>
+</html>

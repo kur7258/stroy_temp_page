@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대시보드 - 프로그램 소개</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- 사이드바 -->
+        <div class="sidebar">
+            <!-- 날짜 헤더 -->
+            <div class="date-header">
+                <div class="current-date">Loading...</div>
+                <div class="current-time-small">Loading...</div>
+            </div>
+            
+            <!-- 권역 섹션 -->
+            <div class="oasis-section">
+                <div class="oasis-header">
+                    <h2>헬시 랩</h2>
+                    <div class="meal-tabs">
+                        <span class="meal-tab">아침</span>
+                        <span class="meal-tab active">점심</span>
+                        <span class="meal-tab">저녁</span>
+                    </div>
+                </div>
+                <div class="visitor-count">
+                    <span class="count-label">10번가</span>
+                    <span class="count-number">78명</span>
+                </div>
+            </div>
+            
+            <!-- 오늘 방문 인원 총합 그래프 -->
+            <div class="visit-chart-section">
+                <div class="visit-chart">
+                    <canvas id="visitChart"></canvas>
+                </div>
+                <div class="time-labels">
+                    <span>11:30</span>
+                    <span>12:00</span>
+                    <span>12:30</span>
+                    <span>13:00</span>
+                </div>
+            </div>
+            
+            <!-- 오늘 방문자 목표량 -->
+            <div class="goal-section">
+                <h3>오늘 목표량</h3>
+                <div class="goal-circle">
+                    <div class="circle-progress-large">
+                        <div class="circle-bg">
+                            <span class="goal-percentage">0%</span>
+                        </div>
+                    </div>
+                    <div class="goal-stats">
+                        <div class="goal-current">
+                            <span class="goal-label">현재</span>
+                            <span class="goal-value">1296명</span>
+                        </div>
+                        <div class="goal-target">
+                            <span class="goal-label">목표</span>
+                            <span class="goal-value">2880명</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 코너별 점유율 -->
+            <div class="corner-ratio-section">
+                <h3>코너별 점유율</h3>
+                <div class="meal-time-info">
+                    <span>점심시간 점유율</span>
+                </div>
+                <div class="stacked-bar-container">
+                    <div class="percentage-labels">
+                        <span>21%</span>
+                        <span>15%</span>
+                        <span>16%</span>
+                        <span>39%</span>
+                        <span>6%</span>
+                    </div>
+                    <div class="stacked-bar">
+                        <div class="bar-segment" style="width: 21%; background-color: #4a9eff;" data-label="A1"></div>
+                        <div class="bar-segment" style="width: 15%; background-color: #00d2d3;" data-label="A2"></div>
+                        <div class="bar-segment" style="width: 16%; background-color: #ff9f43;" data-label="A3"></div>
+                        <div class="bar-segment" style="width: 39%; background-color: #ee5a52;" data-label="A4"></div>
+                        <div class="bar-segment" style="width: 6%; background-color: #ff6b6b;" data-label="A5"></div>
+                    </div>
+                    <div class="corner-legend">
+                        <div class="legend-row">
+                            <div class="legend-item">
+                                <div class="legend-color" style="background-color: #4a9eff;"></div>
+                                <span>A1</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background-color: #00d2d3;"></div>
+                                <span>A2</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background-color: #ff9f43;"></div>
+                                <span>A3</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background-color: #ee5a52;"></div>
+                                <span>A4</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background-color: #ff6b6b;"></div>
+                                <span>A5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 메인 콘텐츠 -->
+        <div class="main-content">
+            <div class="content-header">
+                <h1>식당 코너별 이용자 현황</h1>
+                <div class="date-time">
+                    <span id="current-time">2024년 1월 15일 14:30</span>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <!-- 카드 1: 메인 홀 -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h5>A1</h5>
+                        <h3>이화수육개장</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="progress-circle large">
+                            <div class="circle-progress" data-percentage="75">
+                                <span class="percentage">75%</span>
+                            </div>
+                        </div>
+                        <div class="card-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">현재 이용</span>
+                                <span class="stat-value">75명</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">최대 수용</span>
+                                <span class="stat-value">100명</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 카드 2: VIP룸 -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h5>A2</h5>
+                        <h3>뚝배기전복소라톳밥</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="progress-circle large">
+                            <div class="circle-progress" data-percentage="25">
+                                <span class="percentage">25%</span>
+                            </div>
+                        </div>
+                        <div class="card-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">현재 이용</span>
+                                <span class="stat-value">5명</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">최대 수용</span>
+                                <span class="stat-value">20명</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 카드 3: 테라스 -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h5>A3</h5>
+                        <h3>계란떡볶이</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="progress-circle large">
+                            <div class="circle-progress" data-percentage="90">
+                                <span class="percentage">90%</span>
+                            </div>
+                        </div>
+                        <div class="card-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">현재 이용</span>
+                                <span class="stat-value">270명</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">최대 수용</span>
+                                <span class="stat-value">300명</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 카드 4: 바 코너 -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h5>A4</h5>
+                        <h3>냉면</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="progress-circle large">
+                            <div class="circle-progress" data-percentage="100">
+                                <span class="percentage">100%</span>
+                            </div>
+                        </div>
+                        <div class="card-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">현재 이용</span>
+                                <span class="stat-value">90명</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">최대 수용</span>
+                                <span class="stat-value">90명</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 카드 5: 대기실 -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h5>A5</h5>
+                        <h3>훈제오리</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="progress-circle large">
+                            <div class="circle-progress" data-percentage="10">
+                                <span class="percentage">10%</span>
+                            </div>
+                        </div>
+                        <div class="card-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">현재 대기</span>
+                                <span class="stat-value">50명</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">최대 수용</span>
+                                <span class="stat-value">500명</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 카드 6: 프라이빗 다이닝 -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h5>A6</h5>
+                        <h3>삼겹살</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="progress-circle large">
+                            <div class="circle-progress" data-percentage="50">
+                                <span class="percentage">50%</span>
+                            </div>
+                        </div>
+                        <div class="card-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">현재 이용</span>
+                                <span class="stat-value">50명</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">최대 수용</span>
+                                <span class="stat-value">100명</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 카드 7: 테이크아웃 -->
+                <div class="dashboard-card special">
+                    <div class="card-header">
+                        <h3>테이크아웃</h3>
+                        <span class="card-subtitle">포장주문</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="takeout-stats">
+                            <div class="takeout-number">
+                                <span class="large-number">15건</span>
+                                <span class="takeout-label">오늘</span>
+                            </div>
+                            <div class="takeout-info">
+                                <span class="takeout-detail">대기시간: 12분</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

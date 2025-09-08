@@ -1,0 +1,611 @@
+/* 전체 초기화 및 기본 설정 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #0a0a0a;
+    color: #ffffff;
+    overflow-x: hidden;
+}
+
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* 메인 콘텐츠 */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #0a0a0a;
+    transition: margin-right 0.3s ease;
+}
+
+.main-content.sidebar-open {
+    margin-right: 400px;
+}
+
+/* 헤더 */
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #333;
+}
+
+.header-left h1 {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.header-subtitle {
+    color: #888;
+    font-size: 14px;
+    line-height: 1.5;
+    max-width: 800px;
+}
+
+.date-time {
+    text-align: right;
+}
+
+#current-time {
+    color: #888;
+    font-size: 14px;
+}
+
+/* 도면 컨테이너 */
+.floorplan-container {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+    overflow: auto;
+    max-height: calc(100vh - 200px);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #4a9eff #1a1a1a;
+}
+
+.floorplan-container::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+.floorplan-container::-webkit-scrollbar-track {
+    background: #1a1a1a;
+    border-radius: 6px;
+}
+
+.floorplan-container::-webkit-scrollbar-thumb {
+    background: #4a9eff;
+    border-radius: 6px;
+    border: 2px solid #1a1a1a;
+}
+
+.floorplan-container::-webkit-scrollbar-thumb:hover {
+    background: #5ba7ff;
+}
+
+.floorplan-container::-webkit-scrollbar-corner {
+    background: #1a1a1a;
+}
+
+.floorplan-wrapper {
+    position: relative;
+    display: inline-block;
+    min-width: fit-content;
+}
+
+.floorplan-image {
+    width: 75%;
+    min-width: 800px;
+    max-width: 1400px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    display: block;
+}
+
+/* 설비 마커 */
+.equipment-marker {
+    position: absolute;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.equipment-marker:hover {
+    transform: scale(1.2);
+    z-index: 20;
+}
+
+.marker-dot {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50%;
+    border: 4px solid #ffffff !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+    position: relative;
+    animation: pulse 2s infinite;
+}
+
+.marker-label {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: #ffffff;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.4;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* 마커 라벨은 호버 시 표시하지 않음 (툴팁만 사용) */
+.equipment-marker:hover .marker-label {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* 상태별 마커 색상 */
+.equipment-marker.status-normal .marker-dot {
+    background-color: #4a9eff;
+}
+
+.equipment-marker.status-warning .marker-dot {
+    background-color: #ff9500;
+}
+
+.equipment-marker.status-error .marker-dot {
+    background-color: #ff6b6b;
+}
+
+.equipment-marker.status-maintenance .marker-dot {
+    background-color: #666;
+}
+
+/* 마커 애니메이션 */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(74, 158, 255, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 15px rgba(74, 158, 255, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(74, 158, 255, 0);
+    }
+}
+
+.equipment-marker.status-warning .marker-dot {
+    animation: pulse-warning 2s infinite;
+}
+
+@keyframes pulse-warning {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 149, 0, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 15px rgba(255, 149, 0, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 149, 0, 0);
+    }
+}
+
+.equipment-marker.status-error .marker-dot {
+    animation: pulse-error 2s infinite;
+}
+
+@keyframes pulse-error {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 15px rgba(255, 107, 107, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 107, 107, 0);
+    }
+}
+
+/* 코너 정보 박스 */
+.corner-info-box {
+    position: absolute;
+    background: rgba(26, 26, 26, 0.9);
+    border: 1px solid #4a9eff;
+    border-radius: 8px;
+    padding: 12px;
+    min-width: 200px;
+    z-index: 5;
+}
+
+.corner-title {
+    color: #4a9eff;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.corner-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.corner-stat {
+    color: #cccccc;
+    font-size: 12px;
+}
+
+/* 우측 사이드바 */
+.sidebar {
+    width: 400px;
+    background: linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 100%);
+    border-left: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+    z-index: 1000;
+    overflow-y: auto;
+    right: 0;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+}
+
+.sidebar.active {
+    transform: translateX(0);
+}
+
+.sidebar-header {
+    padding: 20px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebar-header h2 {
+    color: #4a9eff;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.close-sidebar {
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.3s ease;
+}
+
+.close-sidebar:hover {
+    color: #ff6b6b;
+}
+
+/* 사이드바 범례 패널 */
+.sidebar-legend-panel {
+    padding: 15px 20px;
+    border-bottom: 1px solid #333;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.sidebar-legend-panel .legend-header {
+    color: #4a9eff;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.sidebar-legend-panel .legend-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.sidebar-legend-panel .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sidebar-legend-panel .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    flex-shrink: 0;
+}
+
+.sidebar-legend-panel .legend-item span {
+    color: #cccccc;
+    font-size: 12px;
+}
+
+.sidebar-legend-panel .legend-dot.status-normal {
+    background-color: #4a9eff;
+}
+
+.sidebar-legend-panel .legend-dot.status-warning {
+    background-color: #ff9500;
+}
+
+.sidebar-legend-panel .legend-dot.status-error {
+    background-color: #ff6b6b;
+}
+
+.sidebar-legend-panel .legend-dot.status-maintenance {
+    background-color: #666;
+}
+
+/* 장비 상세 정보 패널 */
+.equipment-detail-panel {
+    padding: 20px;
+    border-bottom: 1px solid #333;
+}
+
+.no-selection {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+}
+
+.no-selection-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+.no-selection p {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.equipment-details {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+}
+
+.detail-label {
+    color: #cccccc;
+    font-size: 14px;
+}
+
+.detail-value {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* 에러 패널 */
+.error-panel {
+    padding: 20px;
+}
+
+.panel-header h3 {
+    color: #4a9eff;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.error-section, .warning-section {
+    margin-bottom: 20px;
+}
+
+.error-header, .warning-header {
+    color: #cccccc;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #333;
+}
+
+.error-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+
+.error-item.error {
+    background: rgba(255, 107, 107, 0.1);
+    border-left: 3px solid #ff6b6b;
+}
+
+.error-item.warning {
+    background: rgba(255, 149, 0, 0.1);
+    border-left: 3px solid #ff9500;
+}
+
+.error-icon {
+    color: #ff6b6b;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.error-item.warning .error-icon {
+    color: #ff9500;
+}
+
+.error-code {
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.error-desc {
+    color: #cccccc;
+    font-size: 11px;
+    flex: 1;
+}
+
+
+/* 툴팁 */
+.tooltip {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 10px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    max-width: 250px;
+}
+
+.tooltip.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.tooltip-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.tooltip-title {
+    color: #4a9eff;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.tooltip-status {
+    color: #ffffff;
+    font-size: 12px;
+}
+
+.tooltip-detail {
+    color: #888;
+    font-size: 11px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1200px) {
+    .floorplan-container {
+        max-height: calc(100vh - 150px);
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 350px;
+    }
+    
+    .main-content.sidebar-open {
+        margin-right: 350px;
+    }
+    
+    .content-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .equipment-marker {
+        transform: scale(1.1);
+    }
+    
+    .marker-dot {
+        width: 35px !important;
+        height: 35px !important;
+    }
+    
+    .floorplan-image {
+        width: 90%;
+        min-width: 600px;
+        max-width: 1000px;
+    }
+}
+
+@media (max-width: 600px) {
+    .sidebar {
+        width: 300px;
+    }
+    
+    .main-content.sidebar-open {
+        margin-right: 300px;
+    }
+    
+    .main-content {
+        padding: 15px;
+    }
+    
+    .floorplan-container {
+        padding: 15px;
+        max-height: calc(100vh - 120px);
+    }
+    
+    .floorplan-image {
+        width: 100%;
+        min-width: 400px;
+        max-width: 800px;
+    }
+    
+    /* 모바일에서 스크롤 개선 */
+    .floorplan-container {
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        scrollbar-color: #4a9eff #1a1a1a;
+    }
+    
+    .floorplan-container::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    
+    .floorplan-container::-webkit-scrollbar-track {
+        background: #1a1a1a;
+        border-radius: 4px;
+    }
+    
+    .floorplan-container::-webkit-scrollbar-thumb {
+        background: #4a9eff;
+        border-radius: 4px;
+    }
+    
+    .floorplan-container::-webkit-scrollbar-thumb:hover {
+        background: #5ba7ff;
+    }
+}

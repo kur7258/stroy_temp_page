@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="styles2.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- 좌측 사이드바 (장비 상태) -->
+        <div class="sidebar" id="equipmentSidebar">
+            <div class="sidebar-header">
+                <h2 id="selectedSiteName">장비 상태</h2>
+                <button class="close-sidebar" id="closeSidebar">×</button>
+            </div>
+            
+            <!-- 장비 상세 정보 -->
+            <div class="equipment-panel">
+                <div class="equipment-status" id="equipmentStatus">
+                    <div class="no-selection">
+                        <div class="no-selection-icon">🤖</div>
+                        <p>사이트를 선택하면<br>장비 상태를 확인할 수 있습니다</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 메인 콘텐츠 -->
+        <div class="main-content">
+            <!-- 헤더 -->
+            <div class="content-header">
+                <h1>각 사이트별 식당 정보 현황</h1>
+                <div class="date-time">
+                    <span id="current-time">2025년 9월 8일 14:30</span>
+                </div>
+            </div>
+
+            <!-- 사이트 카드 그리드 -->
+            <div class="sites-grid">
+                <!-- 권역1 -->
+                <div class="site-section">
+                    <h2 class="section-title">권역1</h2>
+                    <div class="site-cards">
+                        <!-- 헬시랩 -->
+                        <div class="site-card healthy" data-site="healthy-lab" data-site-name="헬시랩 권역1">
+                            <div class="site-header">
+                                <span class="site-type">헬시랩</span>
+                                <span class="site-status operational">운영</span>
+                            </div>
+                            <div class="site-stats">
+                                <div class="stat-large">
+                                    <span class="stat-number">4/12</span>
+                                    <div class="stat-right">
+                                        <span class="stat-percentage">35%</span>
+                                        <span class="stat-detail">312명</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 00랩 -->
+                        <div class="site-card zero-lab" data-site="zero-lab-1" data-site-name="00랩 권역1-A">
+                            <div class="site-header">
+                                <span class="site-type">00랩</span>
+                                <span class="site-status operational">운영</span>
+                            </div>
+                            <div class="site-stats">
+                                <div class="stat-large">
+                                    <span class="stat-number">0/21</span>
+                                    <div class="stat-right">
+                                        <span class="stat-percentage">48%</span>
+                                        <span class="stat-detail">1,312명</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 00랩 (highlighted) -->
+                        <div class="site-card zero-lab-alt highlighted" data-site="zero-lab-1-highlight" data-site-name="00랩 권역1-B">
+                            <div class="site-header">
+                                <span class="site-type">00랩</span>
+                                <span class="site-status operational">운영</span>
+                            </div>
+                            <div class="site-stats">
+                                <div class="stat-large">
+                                    <span class="stat-number">1/16</span>
+                                    <div class="stat-right">
+                                        <span class="stat-percentage">25%</span>
+                                        <span class="stat-detail">212명</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 00랩 -->
+                        <div class="site-card zero-lab" data-site="zero-lab-1" data-site-name="00랩 권역1-A">
+                            <div class="site-header">
+                                <span class="site-type">00랩</span>
+                                <span class="site-status operational">운영</span>
+                            </div>
+                            <div class="site-stats">
+                                <div class="stat-large">
+                                    <span class="stat-number">0/21</span>
+                                    <div class="stat-right">
+                                        <span class="stat-percentage">48%</span>
+                                        <span class="stat-detail">1,312명</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 00랩 (highlighted) -->
+                        <div class="site-card zero-lab-alt highlighted" data-site="zero-lab-1-highlight" data-site-name="00랩 권역1-B">
+                            <div class="site-header">
+                                <span class="site-type">00랩</span>
+                                <span class="site-status operational">운영</span>
+                            </div>
+                            <div class="site-stats">
+                                <div class="stat-large">
+                                    <span class="stat-number">1/16</span>
+                                    <div class="stat-right">
+                                        <span class="stat-percentage">25%</span>
+                                        <span class="stat-detail">212명</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 권역2 -->
+                <div class="site-section">
+                    <h2 class="section-title">권역2</h2>
+                    <div class="site-cards">
+                        <!-- 00랩 -->
+                        <div class="site-card zero-lab" data-site="zero-lab-2" data-site-name="00랩 권역2-A">
+                            <div class="site-header">
+                                <span class="site-type">00랩</span>
+                                <span class="site-status operational">운영</span>
+                            </div>
+                            <div class="site-stats">
+                                <div class="stat-large">
+                                    <span class="stat-number">0/11</span>
+                                    <div class="stat-right">
+                                        <span class="stat-percentage">43%</span>
+                                        <span class="stat-detail">112명</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 00랩 -->
+                        <div class="site-card zero-lab" data-site="zero-lab-2-b" data-site-name="00랩 권역2-B">
+                            <div class="site-header">
+                                <span class="site-type">00랩</span>
+                                <span class="site-status operational">운영</span>
+                            </div>
+                            <div class="site-stats">
+                                <div class="stat-large">
+                                    <span class="stat-number">0/23</span>
+                                    <div class="stat-right">
+                                        <span class="stat-percentage">16%</span>
+                                        <span class="stat-detail">1,312명</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 00랩 (highlighted) -->
+                        <div class="site-card zero-lab-alt highlighted" data-site="zero-lab-2-highlight" data-site-name="00랩 권역2-C">
+                            <div class="site-header">
+                                <span class="site-type">00랩</span>
+                                <span class="site-status operational">운영</span>
+                            </div>
+                            <div class="site-stats">
+                                <div class="stat-large">
+                                    <span class="stat-number">2/12</span>
+                                    <div class="stat-right">
+                                        <span class="stat-percentage">22%</span>
+                                        <span class="stat-detail">212명</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 00랩 -->
+                        <div class="site-card zero-lab" data-site="zero-lab-2-b" data-site-name="00랩 권역2-B">
+                            <div class="site-header">
+                                <span class="site-type">00랩</span>
+                                <span class="site-status operational">운영</span>
+                            </div>
+                            <div class="site-stats">
+                                <div class="stat-large">
+                                    <span class="stat-number">0/23</span>
+                                    <div class="stat-right">
+                                        <span class="stat-percentage">16%</span>
+                                        <span class="stat-detail">1,312명</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 00랩 (highlighted) -->
+                        <div class="site-card zero-lab-alt highlighted" data-site="zero-lab-2-highlight" data-site-name="00랩 권역2-C">
+                            <div class="site-header">
+                                <span class="site-type">00랩</span>
+                                <span class="site-status operational">운영</span>
+                            </div>
+                            <div class="site-stats">
+                                <div class="stat-large">
+                                    <span class="stat-number">2/12</span>
+                                    <div class="stat-right">
+                                        <span class="stat-percentage">22%</span>
+                                        <span class="stat-detail">212명</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 권역3 -->
+                <div class="site-section">
+                    <h2 class="section-title">권역3</h2>
+                    <div class="site-cards">
+                        <!-- 00랩 -->
+                        <div class="site-card zero-lab" data-site="zero-lab-3" data-site-name="00랩 권역3-A">
+                            <div class="site-header">
+                                <span class="site-type">00랩</span>
+                                <span class="site-status operational">운영</span>
+                            </div>
+                            <div class="site-stats">
+                                <div class="stat-large">
+                                    <span class="stat-number">0/13</span>
+                                    <div class="stat-right">
+                                        <span class="stat-percentage">33%</span>
+                                        <span class="stat-detail">12명</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 00랩 -->
+                        <div class="site-card zero-lab" data-site="zero-lab-3-maintenance" data-site-name="00랩 권역3-B">
+                            <div class="site-header">
+                                <span class="site-type">00랩</span>
+                                <span class="site-status maintenance">휴무</span>
+                            </div>
+                            <div class="site-stats">
+                                <div class="stat-large">
+                                    <span class="stat-number">0/23</span>
+                                    <div class="stat-right">
+                                        <span class="stat-percentage">-</span>
+                                        <span class="stat-detail">0명</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 00랩 -->
+                        <div class="site-card zero-lab" data-site="zero-lab-3-maintenance" data-site-name="00랩 권역3-B">
+                            <div class="site-header">
+                                <span class="site-type">00랩</span>
+                                <span class="site-status maintenance">휴무</span>
+                            </div>
+                            <div class="site-stats">
+                                <div class="stat-large">
+                                    <span class="stat-number">0/23</span>
+                                    <div class="stat-right">
+                                        <span class="stat-percentage">-</span>
+                                        <span class="stat-detail">0명</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 00랩 -->
+                        <div class="site-card zero-lab" data-site="zero-lab-3-maintenance" data-site-name="00랩 권역3-B">
+                            <div class="site-header">
+                                <span class="site-type">00랩</span>
+                                <span class="site-status maintenance">휴무</span>
+                            </div>
+                            <div class="site-stats">
+                                <div class="stat-large">
+                                    <span class="stat-number">0/23</span>
+                                    <div class="stat-right">
+                                        <span class="stat-percentage">-</span>
+                                        <span class="stat-detail">0명</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 00랩 -->
+                        <div class="site-card zero-lab" data-site="zero-lab-3-maintenance" data-site-name="00랩 권역3-B">
+                            <div class="site-header">
+                                <span class="site-type">00랩</span>
+                                <span class="site-status maintenance">휴무</span>
+                            </div>
+                            <div class="site-stats">
+                                <div class="stat-large">
+                                    <span class="stat-number">0/23</span>
+                                    <div class="stat-right">
+                                        <span class="stat-percentage">-</span>
+                                        <span class="stat-detail">0명</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+                        <!-- 사이트당 -->
+                        <!-- <div class="site-card site-special" data-site="special-site" data-site-name="통합 관제센터">
+                            <div class="site-header">
+                                <span class="site-type">사이트당</span>
+                                <span class="site-status operational">가동여부</span>
+                            </div>
+                            <div class="site-special-content">
+                                <div class="special-item">
+                                    <span class="special-label">장애/가동</span>
+                                    <span class="special-value warning">(장비)</span>
+                                </div>
+                                <div class="special-item">
+                                    <span class="special-label">달성률</span>
+                                    <span class="special-value success">식수인원</span>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+                <!-- 권역4 -->
+                <div class="site-section">
+                    <h2 class="section-title">권역4</h2>
+                    <div class="site-cards">
+                        <!-- 00랩 -->
+                        <div class="site-card zero-lab" data-site="zero-lab-2" data-site-name="00랩 권역2-A">
+                            <div class="site-header">
+                                <span class="site-type">00랩</span>
+                                <span class="site-status operational">운영</span>
+                            </div>
+                            <div class="site-stats">
+                                <div class="stat-large">
+                                    <span class="stat-number">0/11</span>
+                                    <div class="stat-right">
+                                        <span class="stat-percentage">43%</span>
+                                        <span class="stat-detail">112명</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 00랩 -->
+                        <div class="site-card zero-lab" data-site="zero-lab-2-b" data-site-name="00랩 권역2-B">
+                            <div class="site-header">
+                                <span class="site-type">00랩</span>
+                                <span class="site-status operational">운영</span>
+                            </div>
+                            <div class="site-stats">
+                                <div class="stat-large">
+                                    <span class="stat-number">0/23</span>
+                                    <div class="stat-right">
+                                        <span class="stat-percentage">16%</span>
+                                        <span class="stat-detail">1,312명</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 00랩 (highlighted) -->
+                        <div class="site-card zero-lab-alt highlighted" data-site="zero-lab-2-highlight" data-site-name="00랩 권역2-C">
+                            <div class="site-header">
+                                <span class="site-type">00랩</span>
+                                <span class="site-status operational">운영</span>
+                            </div>
+                            <div class="site-stats">
+                                <div class="stat-large">
+                                    <span class="stat-number">2/12</span>
+                                    <div class="stat-right">
+                                        <span class="stat-percentage">22%</span>
+                                        <span class="stat-detail">212명</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 00랩 -->
+                        <div class="site-card zero-lab" data-site="zero-lab-2-b" data-site-name="00랩 권역2-B">
+                            <div class="site-header">
+                                <span class="site-type">00랩</span>
+                                <span class="site-status operational">운영</span>
+                            </div>
+                            <div class="site-stats">
+                                <div class="stat-large">
+                                    <span class="stat-number">0/23</span>
+                                    <div class="stat-right">
+                                        <span class="stat-percentage">16%</span>
+                                        <span class="stat-detail">1,312명</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 00랩 (highlighted) -->
+                        <div class="site-card zero-lab-alt highlighted" data-site="zero-lab-2-highlight" data-site-name="00랩 권역2-C">
+                            <div class="site-header">
+                                <span class="site-type">00랩</span>
+                                <span class="site-status operational">운영</span>
+                            </div>
+                            <div class="site-stats">
+                                <div class="stat-large">
+                                    <span class="stat-number">2/12</span>
+                                    <div class="stat-right">
+                                        <span class="stat-percentage">22%</span>
+                                        <span class="stat-detail">212명</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script2.js"></script>
+</body>
+</html>
+
