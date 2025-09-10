@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Детали вопроса - Q&A</title>
+    <link rel="stylesheet" href="qna-detail.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- 헤더 -->
+        <header class="detail-header">
+            <div class="header-spacer"></div>
+            <button class="language-btn" onclick="toggleLanguage()">Language</button>
+        </header>
+
+        <!-- 메인 컨텐츠 -->
+        <main class="detail-main">
+            <!-- 질문 제목 -->
+            <div class="question-title-section">
+                <h2>Метод устранения CIG. VANES EMPTY</h2>
+            </div>
+
+            <!-- 질문 내용 박스 -->
+            <div class="question-content-section">
+                <div class="question-box">
+                    <div class="question-header">
+                        <h3>Подробности вопроса</h3>
+                    </div>
+                    <div class="question-text">
+                        <p>Пожалуйста, расскажите о методе устранения CIG. VANES EMPTY</p>
+                    </div>
+                    
+                    <!-- 질문 정보 -->
+                    <div class="question-info">
+                        <div class="info-item">
+                            <span class="info-label">Автор:</span>
+                            <span class="info-value">Александр</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Дата создания:</span>
+                            <span class="info-value">2025-09-10</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Категория:</span>
+                            <span class="info-value">Техническое обслуживание</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Приоритет:</span>
+                            <span class="info-value priority-high">Высокий</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 이미지 첨부 섹션 -->
+            <div class="image-attachment-section">
+                <div class="attachment-box">
+                    <div class="attachment-header">
+                        <h3>Приложенные изображения</h3>
+                    </div>
+                    <div class="image-container">
+                        <img src="image copy 3.png" alt="Схема CIG VANES EMPTY" class="technical-image">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 답변 섹션 -->
+            <div class="answer-section">
+                <div class="answer-box">
+                    <div class="answer-header">
+                        <h3>Ответ специалиста</h3>
+                        <span class="answer-status answered">Отвечено</span>
+                    </div>
+                    <div class="answer-content">
+                        <div class="answer-author">
+                            <div class="author-info">
+                                <span class="author-name">Инженер Петров И.В.</span>
+                                <span class="answer-date">2025-09-10 15:30</span>
+                            </div>
+                        </div>
+                        <div class="answer-text">
+                            <p><strong>Метод устранения CIG. VANES EMPTY:</strong></p>
+                            <ol>
+                                <li>Остановите оборудование и отключите питание</li>
+                                <li>Откройте крышку турбины и проверьте состояние лопаток</li>
+                                <li>Очистите лопатки от загрязнений специальным растворителем</li>
+                                <li>Проверьте крепления и замените поврежденные элементы</li>
+                                <li>Соберите турбину в обратном порядке</li>
+                                <li>Проведите тестовый запуск и проверьте параметры</li>
+                            </ol>
+                            <p><strong>Важно:</strong> При выполнении работ обязательно соблюдайте технику безопасности и используйте защитные средства.</p>
+                        </div>
+                        <div class="answer-attachments">
+                            <div class="attachment-item">
+                                <span class="attachment-icon">📄</span>
+                                <span class="attachment-name">Инструкция_CIG_VANES.pdf</span>
+                            </div>
+                            <div class="attachment-item">
+                                <span class="attachment-icon">🖼️</span>
+                                <span class="attachment-name">Схема_турбины.jpg</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 네비게이션 버튼 -->
+            <div class="navigation-buttons">
+                <button class="nav-btn secondary" onclick="history.back()">← Назад к списку</button>
+                <button class="nav-btn" onclick="location.href='qna-detail-ko.html'">한국어 버전</button>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function toggleLanguage() {
+            // 언어 전환 기능
+            const currentLang = document.documentElement.lang;
+            if (currentLang === 'ru') {
+                window.location.href = 'qna-detail-ko.html';
+            } else {
+                window.location.href = 'qna-detail-ru.html';
+            }
+        }
+
+        // 페이지 로드 애니메이션
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.question-content-section, .image-attachment-section, .answer-section');
+            sections.forEach((section, index) => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    section.style.transition = 'all 0.6s ease';
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>
